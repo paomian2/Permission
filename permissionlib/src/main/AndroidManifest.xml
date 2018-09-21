@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.linxz.permissionlib" />
+    package="com.linxz.permissionlib">
+    <application>
+        <activity android:name=".PermissionActivity" android:theme="@style/Custom_Progress"/>
+        <activity android:name=".globledialog.DialogContentActivity"/>
+    </application>
+</manifest>
