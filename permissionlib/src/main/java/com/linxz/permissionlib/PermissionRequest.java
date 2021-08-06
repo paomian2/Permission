@@ -27,6 +27,7 @@ public class PermissionRequest {
     private final Context mContext;
 
     private String[] mPermissions = new String[0];
+    private String[] mPermissionsDesc = new String[0];
 
     private int mRequestCode = -1;
     PermissionListener mCallback;
@@ -67,6 +68,19 @@ public class PermissionRequest {
     public PermissionRequest permission(String... permissions) {
         if(permissions!=null){
             mPermissions = permissions;
+        }
+        return this;
+    }
+
+    /**
+     * 输入需要检测的权限
+     * @param permissionsDesc
+     * @return
+     */
+    @NonNull
+    public PermissionRequest permissionDesc(String... permissionsDesc) {
+        if(permissionsDesc!=null){
+            mPermissionsDesc = permissionsDesc;
         }
         return this;
     }

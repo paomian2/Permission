@@ -67,3 +67,13 @@ private fun mineAuthRequest(){
         })
     }
 ```
+
+
+新增功能：支持修改权限名称
+```java
+val groups =  HashMap<String,String>()
+groups["android.permission.CALL_PHONE"] = "哈哈哈权限"
+LinxzPermissionUtils.permissionGroupDesc(groups)
+
+```
+

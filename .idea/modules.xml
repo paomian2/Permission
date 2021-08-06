@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Permission.iml" filepath="$PROJECT_DIR$/Permission.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/permissionlib/permissionlib.iml" filepath="$PROJECT_DIR$/permissionlib/permissionlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Permission.iml" filepath="$PROJECT_DIR$/.idea/Permission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Permission.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Permission.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/permissionlib/Permission.permissionlib.iml" filepath="$PROJECT_DIR$/.idea/modules/permissionlib/Permission.permissionlib.iml" />
     </modules>
   </component>
 </project>

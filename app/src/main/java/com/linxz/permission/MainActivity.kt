@@ -12,6 +12,7 @@ import com.linxz.permissionlib.LinxzPermissionUtils
 import com.linxz.permissionlib.interfaces.MineDialogHandler
 import com.linxz.permissionlib.listener.MineDialogListener
 import com.linxz.permissionlib.listener.PermissionListener
+import java.util.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         btnMine.setOnClickListener({
             mineAuthRequest()
         })
+
+
     }
 
     /**默认样式权限申请*/

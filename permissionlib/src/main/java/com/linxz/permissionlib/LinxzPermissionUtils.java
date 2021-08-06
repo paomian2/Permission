@@ -16,8 +16,10 @@ import com.linxz.permissionlib.listener.PermissionListener;
 import com.linxz.permissionlib.listener.RationaleListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,11 +28,32 @@ import java.util.Set;
 public class LinxzPermissionUtils {
 
     private static Set<String> permissions;
-    
+    private static HashMap<String,String> permissionGroupDesc = new HashMap<>();
+
     public static void checkPermission(Context cx, String[] permission, PermissionListener listener){
         LinxzPermissionUtils
                 .with(cx)
                 .permission(permission)
+                .rationale(new RationaleListener() {
+                    @Override
+                    public void showRequestPermissionRationale(int requestCode, DialogHandler requestRationaleHandler) {
+                        requestRationaleHandler.showDefaultDialog("正在获取权限", "该功能需获取新的权限，否则无法正常使用");
+                    }
+
+                    @Override
+                    public void showSettingPermissionRationale(int requestCode, DialogHandler settingRationaleHandler) {
+                        settingRationaleHandler.showDefaultDialog("权限获取失败", "权限请求失败，无法正常使用该功能，是否去“设置“中开启权限？");
+                    }
+                })
+                .callback(listener)
+                .request();
+    }
+
+    public static void checkPermission(Context cx, String[] permission,String[] permissionsDesc, PermissionListener listener){
+        LinxzPermissionUtils
+                .with(cx)
+                .permission(permission)
+                .permissionDesc(permissionsDesc)
                 .rationale(new RationaleListener() {
                     @Override
                     public void showRequestPermissionRationale(int requestCode, DialogHandler requestRationaleHandler) {
@@ -189,6 +212,15 @@ public class LinxzPermissionUtils {
         HashSet<String> groupLabel = new HashSet<>();
         for (String permission : permissions) {
             String labelStr = getPermissionGroupLabelStr(context, permission);
+            if ("android.permission-group.UNDEFINED".equals(labelStr)){
+                  if (permissionGroupDesc.size() == 0){
+                      initPermissionGroupDesc();
+                  }
+                  String staticLabel = permissionGroupDesc.get(permission);
+                  if (!TextUtils.isEmpty(staticLabel)){
+                      labelStr = staticLabel;
+                  }
+            }
             if (!TextUtils.isEmpty(labelStr)) {
                 groupLabel.add(labelStr);
             }
@@ -251,5 +283,54 @@ public class LinxzPermissionUtils {
         return permissions;
     }
 
+
+    public static void permissionGroupDesc(HashMap<String,String> groups){
+         for (Map.Entry<String, String> map:groups.entrySet()){
+             permissionGroupDesc.put(map.getKey(),map.getValue());
+         }
+    }
+
+    private static void initPermissionGroupDesc(){
+        permissionGroupDesc.clear();
+        permissionGroupDesc.put("android.permission.ACCESS_CHECKIN_PROPERTIES","properties读写访问");
+        permissionGroupDesc.put("android.permission.ACCESS_COARSE_LOCATION","网络定位");
+        permissionGroupDesc.put("android.permission.ACCESS_FINE_LOCATION","位置定位");
+        permissionGroupDesc.put("android.permission.ACCESS_LOCATION_EXTRA_COMMANDS","额外位置");
+        permissionGroupDesc.put("android.permission.ACCESS_MOCK_LOCATION","模拟定位");
+        permissionGroupDesc.put("android.permission.ACCESS_NETWORK_STATE","网络信息");
+        permissionGroupDesc.put("android.permission.ACCESS_SURFACE_FLINGER","SurfaceFlinger底层特性");
+        permissionGroupDesc.put("android.permission.ACCESS_WIFI_STATE","Wi-Fi状态");
+        permissionGroupDesc.put("android.permission.ADD_SYSTEM_SERVICE","系统服务");
+        permissionGroupDesc.put("android.permission.BATTERY_STATS","电池状态");
+        permissionGroupDesc.put("android.permission.BLUETOOTH","蓝牙设备");
+        permissionGroupDesc.put("android.permission.BLUETOOTH_ADMIN","蓝牙配对");
+        permissionGroupDesc.put("android.permission.CALL_PHONE","电话拨号");
+        permissionGroupDesc.put("android.permission.CAMERA","相机");
+        permissionGroupDesc.put("android.permission.CHANGE_NETWORK_STATE","网络状态");
+        permissionGroupDesc.put("android.permission.CHANGE_WIFI_STATE","Wi-Fi状态");
+        permissionGroupDesc.put("android.permission.CLEAR_APP_CACHE","清除缓存");
+        permissionGroupDesc.put("android.permission.DELETE_CACHE_FILES","文件删除");
+        permissionGroupDesc.put("android.permission.DELETE_PACKAGES","安装包删除");
+        permissionGroupDesc.put("android.permission.DEVICE_POWER","电源管理");
+        permissionGroupDesc.put("android.permission.DISABLE_KEYGUARD","禁用键盘");
+        permissionGroupDesc.put("android.permission.HARDWARE_TEST","硬件访问");
+        permissionGroupDesc.put("android.permission.INSTALL_PACKAGES","安装应用");
+        permissionGroupDesc.put("android.permission.INTERNAL_SYSTEM_WINDOW","系统窗口");
+        permissionGroupDesc.put("android.permission.MODIFY_AUDIO_SETTINGS","音频设置");
+        permissionGroupDesc.put("android.permission.MODIFY_PHONE_STATE","电话状态");
+        permissionGroupDesc.put("android.permission.READ_CALENDAR","日历");
+        permissionGroupDesc.put("android.permission.READ_CONTACTS","通讯录");
+        permissionGroupDesc.put("android.permission.READ_SMS","短信");
+        permissionGroupDesc.put("android.permission.REBOOT","重写启动");
+        permissionGroupDesc.put("android.permission.RECEIVE_SMS","短信");
+        permissionGroupDesc.put("android.permission.RECORD_AUDIO","音频录制");
+        permissionGroupDesc.put("android.permission.RESTART_PACKAGES","启动程序");
+        permissionGroupDesc.put("android.permission.SEND_SMS","发送短信");
+        permissionGroupDesc.put("android.permission.SET_WALLPAPER","壁纸");
+        permissionGroupDesc.put("android.permission.VIBRATE","震动");
+        permissionGroupDesc.put("android.permission.WRITE_CALENDAR","日历");
+        permissionGroupDesc.put("android.permission.WRITE_CONTACTS","通讯录");
+        permissionGroupDesc.put("android.permission.WRITE_SMS","短信");
+    }
 
 }
