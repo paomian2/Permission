@@ -293,9 +293,9 @@ public class LinxzPermissionUtils {
     private static void initPermissionGroupDesc(){
         permissionGroupDesc.clear();
         permissionGroupDesc.put("android.permission.ACCESS_CHECKIN_PROPERTIES","properties读写访问");
-        permissionGroupDesc.put("android.permission.ACCESS_COARSE_LOCATION","网络定位");
-        permissionGroupDesc.put("android.permission.ACCESS_FINE_LOCATION","位置定位");
-        permissionGroupDesc.put("android.permission.ACCESS_LOCATION_EXTRA_COMMANDS","额外位置");
+        permissionGroupDesc.put("android.permission.ACCESS_COARSE_LOCATION","位置信息");
+        permissionGroupDesc.put("android.permission.ACCESS_FINE_LOCATION","位置信息");
+        permissionGroupDesc.put("android.permission.ACCESS_LOCATION_EXTRA_COMMANDS","位置信息");
         permissionGroupDesc.put("android.permission.ACCESS_MOCK_LOCATION","模拟定位");
         permissionGroupDesc.put("android.permission.ACCESS_NETWORK_STATE","网络信息");
         permissionGroupDesc.put("android.permission.ACCESS_SURFACE_FLINGER","SurfaceFlinger底层特性");
@@ -331,6 +331,8 @@ public class LinxzPermissionUtils {
         permissionGroupDesc.put("android.permission.WRITE_CALENDAR","日历");
         permissionGroupDesc.put("android.permission.WRITE_CONTACTS","通讯录");
         permissionGroupDesc.put("android.permission.WRITE_SMS","短信");
+        permissionGroupDesc.put("android.permission.WRITE_EXTERNAL_STORAGE","写存储");
+        permissionGroupDesc.put("android.permission.READ_EXTERNAL_STORAGE","读取存储空间");
     }
 
 }

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     /**默认样式权限申请*/
     private fun defAuthRequest(){
-        val permission=arrayOf(android.Manifest.permission.CALL_PHONE)
+        val permission=arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         LinxzPermissionUtils.checkPermission(this,permission,object :PermissionListener{
             override fun onFailed(requestCode: Int, deniedPermissions: Array<out String>) {
                 Toast.makeText(this@MainActivity,"没有授权无法使用该功能",Toast.LENGTH_LONG).show()
