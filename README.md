@@ -22,7 +22,7 @@ allprojects {
    Add the dependency
 ```java
 dependencies {
-   implementation 'com.github.paomian2:Permission:v1.0.1'
+   implementation 'com.github.paomian2:Permission:v1.0.3'
 }
 ```
 
